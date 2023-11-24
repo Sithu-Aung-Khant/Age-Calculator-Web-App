@@ -50,7 +50,7 @@ body {
   color: var(--smokey-grey);
 }
 
-.col p {
+.error-message {
   font-size: 11px;
   font-style: italic;
   /* display: none; */
@@ -60,10 +60,6 @@ body {
 .col label.error {
   color: var(--light-red);
 }
-
-/* .col p .error {
-  display: block;
-} */
 
 input.error {
   border: 1px solid var(--light-red);
