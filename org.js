@@ -9,7 +9,7 @@ const error_messages = document.querySelectorAll('.error-message');
 const submit_btn = document.getElementById('submit');
 
 // Used text input instead of number for flexible customization.
-// Restricting text input to only allow numeric values.
+// restricting text input to only allow numeric values.
 function restrictInput(input) {
   input.value = input.value.replace(/[^\d]/g, '');
 }
@@ -20,26 +20,17 @@ function validateAndHandleError(value, index, errorMessage, maxValue) {
 
   if (value.length === 0 || (maxValue !== undefined && value > maxValue)) {
     error_messages[index].innerHTML = errorText;
-    setErrorStyles(index);
+    error_messages[index].classList.add('error');
+    labels[index].classList.add('error');
+    inputs[index].classList.add('error');
     return false; // Indicates validation failure
   }
-
-  // Clear error messages and styles on successful validation
-  clearErrorStyles(index);
-  return true; // Indicates validation success
-}
-
-function setErrorStyles(index) {
-  error_messages[index].classList.add('error');
-  labels[index].classList.add('error');
-  inputs[index].classList.add('error');
-}
-
-function clearErrorStyles(index) {
   error_messages[index].innerHTML = '';
   error_messages[index].classList.remove('error');
   labels[index].classList.remove('error');
   inputs[index].classList.remove('error');
+
+  return true; // Indicates validation success
 }
 
 function calculateAge() {
@@ -48,14 +39,12 @@ function calculateAge() {
   const month_input = document.getElementById('mm').value;
   const day_input = document.getElementById('dd').value;
 
-  // Validate Date, Month & Year
-  const maxDays = new Date(year_input, month_input, 0).getDate();
-
+  // Validating Date, Monnth & Year
   const validate_day = validateAndHandleError(
     day_input,
     0,
     'Must be a valid date',
-    maxDays
+    31
   );
   const validate_month = validateAndHandleError(
     month_input,
@@ -71,7 +60,7 @@ function calculateAge() {
   );
 
   if (validate_day && validate_month && validate_year) {
-    let dob = new Date(`${month_input}/${day_input}/${year_input}`);
+    let dob = new Date(`${month_input}/ ${day_input}/ ${year_input}`);
     let ageDiff = Date.now() - dob;
     let ageDate = new Date(ageDiff);
     let ageYears = ageDate.getUTCFullYear() - 1970;
@@ -82,6 +71,7 @@ function calculateAge() {
     month_result.textContent = ageMonth;
     day_result.textContent = ageDay;
   }
+  return;
 }
 
 submit_btn.addEventListener('click', (e) => {
