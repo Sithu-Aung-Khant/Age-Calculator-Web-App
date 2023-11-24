@@ -85,7 +85,7 @@ To see how you can add code snippets, see below:
 
 ```js
 const proudOfThisFunc = () => {
-  console.log("🎉");
+  console.log('🎉');
 };
 ```
 
@@ -130,8 +130,8 @@ function dateDiffInYearsMonthsDays(date1, date2) {
 }
 
 // Example usage:
-const startDate = new Date("2022-01-01");
-const endDate = new Date("2023-11-20");
+const startDate = new Date('2022-01-01');
+const endDate = new Date('2023-11-20');
 const diff = dateDiffInYearsMonthsDays(startDate, endDate);
 
 console.log(`Years: ${diff.years}, Months: ${diff.months}, Days: ${diff.days}`);
@@ -152,3 +152,7 @@ console.log(`Years: ${diff.years}, Months: ${diff.months}, Days: ${diff.days}`);
 This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
 
 **Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+
+##Notes
+
+- restrict
