@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <title>Age Calculator</title>
+    <script defer src="./index.js"></script>
+  </head>
+  <body>
+    <main>
+      <section id="card">
+        <div class="input-values grid">
+          <div class="col">
+            <label for="dd">DAY</label>
+            <input
+              type="text"
+              oninput="restrictInput(this)"
+              id="dd"
+              placeholder="DD"
+            />
+            <p class="error-message"></p>
+          </div>
+          <div class="col">
+            <label for="mm">MONTH</label>
+            <input
+              type="text"
+              oninput="restrictInput(this)"
+              id="mm"
+              placeholder="MM"
+            />
+            <p class="error-message"></p>
+          </div>
+          <div class="col">
+            <label for="yy">YEAR</label>
+            <input
+              type="text"
+              oninput="restrictInput(this)"
+              id="yy"
+              placeholder="YYYY"
+            />
+            <p class="error-message"></p>
+          </div>
+        </div>
+        <div class="divider">
+          <div class="line"></div>
+          <button id="submit" type="submit">
+            <img class="btn" src="./assets/images/icon-arrow.svg" alt="btn" />
+          </button>
+        </div>
+        <div class="results">
+          <h1><span id="year" class="result">--</span> years</h1>
+          <h1><span id="month" class="result">--</span> months</h1>
+          <h1><span id="day" class="result">--</span> days</h1>
+        </div>
+      </section>
+    </main>
+
+    <!-- ATTRIBUTION SECTION -->
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a
+          href="https://www.frontendmentor.io?ref=challenge"
+          target="_blank"
+          rel="noopener"
+          >Frontend Mentor</a
+        >. Coded by
+        <a
+          href="https://github.com/Sithu-Aung-Khant"
+          target="_blank"
+          rel="noopener"
+          >Sithu-thedev</a
+        >.
+      </div>
+    </footer>
+  </body>
+</html>

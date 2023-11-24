@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap');
+
+:root {
+  /* Primary */
+  --purple: hwb(259 30% 0%);
+  --light-red: hsl(0, 100%, 67%);
+
+  /* Neutral */
+  --white: hsl(0, 0%, 100%);
+  --off-white: hsl(0, 0%, 94%);
+  --light-grey: hsl(0, 0%, 86%);
+  --smokey-grey: hsl(0, 1%, 44%);
+  --off-black: hsl(0, 0%, 8%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--off-white);
+}
+
+#card {
+  width: 650px;
+  padding: 2.5rem;
+  margin: 2rem auto 0;
+  border-radius: 1rem 1rem 8rem;
+  background-color: var(--white);
+}
+
+.grid {
+  display: grid;
+  column-gap: 1rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.col label {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--smokey-grey);
+}
+
+.col p {
+  font-size: 11px;
+  font-style: italic;
+  /* display: none; */
+  color: var(--light-red);
+}
+
+.col label.error {
+  color: var(--light-red);
+}
+
+/* .col p .error {
+  display: block;
+} */
+
+input.error {
+  border: 1px solid var(--light-red);
+}
+
+input {
+  font-size: 22px;
+  font-weight: 700;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--light-grey);
+  margin: 5px 0 10px;
+  appearance: textfield;
+}
+
+input:focus {
+  border: 1px solid var(--purple);
+  outline: none;
+}
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  height: 1px;
+  background: var(--light-grey);
+  bottom: 0;
+  left: 0;
+  width: 85%;
+}
+
+button {
+  border: 1px solid var(--light-grey);
+  padding: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--purple);
+}
+
+button:hover {
+  background-color: var(--off-black);
+  cursor: pointer;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+}
+
+.results {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.result {
+  color: var(--purple);
+}
+
+/* FOR MOBILE  */
+@media screen and (max-width: 670px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  #card {
+    width: 90%;
+    padding: 1.5rem;
+    border-bottom-right-radius: 5rem;
+  }
+  input {
+    font-size: 16px;
+    padding: 0.8rem;
+  }
+  .col label {
+    font-size: 10px;
+  }
+  .divider {
+    position: relative;
+    padding: 2.5rem 0;
+  }
+  .line {
+    width: 100%;
+  }
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  img {
+    width: 22px;
+    height: 22px;
+  }
+  .results {
+    font-size: 1.8rem;
+  }
+}
+
+/* FOR TABLET SCREEN SIZES */
+@media only screen and (min-device-width: 426px) and (max-device-width: 768px) {
+  #card {
+    width: 75%;
+  }
+}
+
+/* FOR DESKTOP */
+@media screen and (min-width: 670px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.attribution {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  padding: 1rem;
+}
+.attribution a {
+  color: var(--purple);
+  font-size: 12px;
+  text-decoration: none;
+}
