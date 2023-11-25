@@ -1,12 +1,15 @@
-// Elements for Displaying Results
-const year_result = document.getElementById('year');
-const month_result = document.getElementById('month');
-const day_result = document.getElementById('day');
+const results = {
+  year: document.getElementById('year'),
+  month: document.getElementById('month'),
+  day: document.getElementById('day'),
+};
 
-const labels = document.querySelectorAll('label');
-const inputs = document.querySelectorAll('input');
-const error_messages = document.querySelectorAll('.error-message');
-const submit_btn = document.getElementById('submit');
+const elements = {
+  labels: document.querySelectorAll('label'),
+  inputs: document.querySelectorAll('input'),
+  errorMessages: document.querySelectorAll('.error-message'),
+  submitBtn: document.getElementById('submit'),
+};
 
 // Used text input instead of number for flexible customization.
 // Restricting text input to only allow numeric values.
@@ -19,77 +22,63 @@ function validateAndHandleError(value, index, errorMessage, maxValue) {
     value.length === 0 ? 'This field is required' : errorMessage;
 
   if (value.length === 0 || (maxValue !== undefined && value > maxValue)) {
-    error_messages[index].innerHTML = errorText;
     setErrorStyles(index);
+    elements.errorMessages[index].innerHTML = errorText;
     return false; // Indicates validation failure
   }
 
-  // Clear error messages and styles on successful validation
   clearErrorStyles(index);
   return true; // Indicates validation success
 }
 
 function setErrorStyles(index) {
-  error_messages[index].classList.add('error');
-  labels[index].classList.add('error');
-  inputs[index].classList.add('error');
+  elements.errorMessages[index].classList.add('error');
+  elements.labels[index].classList.add('error');
+  elements.inputs[index].classList.add('error');
 }
 
 function clearErrorStyles(index) {
-  error_messages[index].innerHTML = '';
-  error_messages[index].classList.remove('error');
-  labels[index].classList.remove('error');
-  inputs[index].classList.remove('error');
+  elements.errorMessages[index].innerHTML = '';
+  elements.errorMessages[index].classList.remove('error');
+  elements.labels[index].classList.remove('error');
+  elements.inputs[index].classList.remove('error');
 }
 
 function calculateAge() {
-  // Input Elements
-  const year_input = document.getElementById('yy').value;
-  const month_input = document.getElementById('mm').value;
-  const day_input = document.getElementById('dd').value;
+  const [year_input, month_input, day_input] = ['yy', 'mm', 'dd'].map(
+    (id) => document.getElementById(id).value
+  );
 
-  // Validate Date, Month & Year
   const maxDays = new Date(year_input, month_input, 0).getDate();
 
-  const validate_day = validateAndHandleError(
-    day_input,
-    0,
-    'Must be a valid date',
-    maxDays
-  );
-  const validate_month = validateAndHandleError(
-    month_input,
-    1,
-    'Must be a valid month',
-    12
-  );
-  const validate_year = validateAndHandleError(
-    year_input,
-    2,
-    'Must be in the past',
-    new Date().getFullYear()
-  );
+  const validations = [
+    validateAndHandleError(day_input, 0, 'Must be a valid date', maxDays),
+    validateAndHandleError(month_input, 1, 'Must be a valid month', 12),
+    validateAndHandleError(
+      year_input,
+      2,
+      'Must be in the past',
+      new Date().getFullYear()
+    ),
+  ];
 
-  if (validate_day && validate_month && validate_year) {
-    let dob = new Date(`${month_input}/${day_input}/${year_input}`);
-    let ageDiff = Date.now() - dob;
-    let ageDate = new Date(ageDiff);
-    let ageYears = ageDate.getUTCFullYear() - 1970;
-    let ageMonth = ageDate.getUTCMonth();
-    let ageDay = ageDate.getUTCDate();
+  if (validations.every((validation) => validation)) {
+    const dob = new Date(`${month_input}/${day_input}/${year_input}`);
+    const ageDiff = Date.now() - dob;
+    const ageDate = new Date(ageDiff);
 
-    year_result.textContent = ageYears;
-    month_result.textContent = ageMonth;
-    day_result.textContent = ageDay;
+    results.year.textContent = ageDate.getUTCFullYear() - 1970;
+    results.month.textContent = ageDate.getUTCMonth();
+    results.day.textContent = ageDate.getUTCDate();
   }
 }
 
-submit_btn.addEventListener('click', (e) => {
+elements.submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   calculateAge();
 });
 
-inputs.forEach((input) => {
+elements.inputs.forEach((input) => {
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       calculateAge();
