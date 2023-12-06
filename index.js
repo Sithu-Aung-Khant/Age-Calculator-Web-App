@@ -1,9 +1,4 @@
-const results = {
-  year: document.getElementById('year'),
-  month: document.getElementById('month'),
-  day: document.getElementById('day'),
-};
-
+// Elements
 const elements = {
   labels: document.querySelectorAll('label'),
   inputs: document.querySelectorAll('input'),
@@ -11,12 +6,20 @@ const elements = {
   submitBtn: document.getElementById('submit'),
 };
 
+// Elements to Display Results
+const results = {
+  year: document.getElementById('year'),
+  month: document.getElementById('month'),
+  day: document.getElementById('day'),
+};
+
 // Used text input instead of number for flexible customization.
-// Restricting text input to only allow numeric values.
+// Therefore, Restricting text input to only allow numeric values.
 function restrictInput(input) {
   input.value = input.value.replace(/[^\d]/g, '');
 }
 
+// Function to Validate and Handle Errors
 function validateAndHandleError(value, index, errorMessage, maxValue) {
   const errorText =
     value.length === 0 ? 'This field is required' : errorMessage;
@@ -31,12 +34,14 @@ function validateAndHandleError(value, index, errorMessage, maxValue) {
   return true; // Indicates validation success
 }
 
+// Adding Error Styles
 function setErrorStyles(index) {
   elements.errorMessages[index].classList.add('error');
   elements.labels[index].classList.add('error');
   elements.inputs[index].classList.add('error');
 }
 
+// Removing Error Styles
 function clearErrorStyles(index) {
   elements.errorMessages[index].innerHTML = '';
   elements.errorMessages[index].classList.remove('error');
@@ -44,6 +49,7 @@ function clearErrorStyles(index) {
   elements.inputs[index].classList.remove('error');
 }
 
+// Calculate Age
 function calculateAge() {
   const [year_input, month_input, day_input] = ['yy', 'mm', 'dd'].map(
     (id) => document.getElementById(id).value
@@ -67,10 +73,34 @@ function calculateAge() {
     const ageDiff = Date.now() - dob;
     const ageDate = new Date(ageDiff);
 
-    results.year.textContent = ageDate.getUTCFullYear() - 1970;
-    results.month.textContent = ageDate.getUTCMonth();
-    results.day.textContent = ageDate.getUTCDate();
+    // Extract the target values for the animation
+    const targetYears = ageDate.getUTCFullYear() - 1970;
+    const targetMonths = ageDate.getUTCMonth();
+    const targetDays = ageDate.getUTCDate();
+
+    // Call animateCount for each part of the result
+    animateCount('year', targetYears);
+    animateCount('month', targetMonths);
+    animateCount('day', targetDays);
   }
+}
+
+function animateCount(elementId, targetValue) {
+  const element = results[elementId];
+  const initialValue = 0;
+  const duration = 500;
+  const increment = (targetValue - initialValue) / (duration / 50);
+
+  let currentValue = initialValue;
+
+  const intervalId = setInterval(() => {
+    currentValue += increment;
+    element.textContent = Math.round(currentValue);
+
+    if (currentValue >= targetValue) {
+      clearInterval(intervalId);
+    }
+  }, 50);
 }
 
 elements.submitBtn.addEventListener('click', (e) => {
