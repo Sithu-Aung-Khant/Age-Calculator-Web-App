@@ -13,6 +13,11 @@ const results = {
   day: document.getElementById('day'),
 };
 
+// Variables to store previous input values
+let prevYearInput = '';
+let prevMonthInput = '';
+let prevDayInput = '';
+
 // Used text input instead of number for flexible customization.
 // Therefore, Restricting text input to only allow numeric values.
 function restrictInput(input) {
@@ -68,6 +73,15 @@ function calculateAge() {
     ),
   ];
 
+  // Check if the inputs have changed
+  if (
+    year_input === prevYearInput &&
+    month_input === prevMonthInput &&
+    day_input === prevDayInput
+  ) {
+    return; // No need to recalculate if inputs haven't changed
+  }
+
   if (validations.every((validation) => validation)) {
     const dob = new Date(`${month_input}/${day_input}/${year_input}`);
     const ageDiff = Date.now() - dob;
@@ -82,6 +96,11 @@ function calculateAge() {
     animateCount('year', targetYears);
     animateCount('month', targetMonths);
     animateCount('day', targetDays);
+
+    // Update previous input values
+    prevYearInput = year_input;
+    prevMonthInput = month_input;
+    prevDayInput = day_input;
   }
 }
 
